@@ -10,14 +10,14 @@ class BankAccount {
 
   append(amount) {
     if (amount > 0) this.balance += amount;
-    this.hist.push({ operation: "append", amount });
+    this.hist.push({ operation: "append", amount, failed: amount < 0 });
 
     return this.balance;
   }
 
   subtract(amount) {
     if (amount > 0) this.balance -= amount;
-    this.hist.push({ operation: "subtract", amount });
+    this.hist.push({ operation: "subtract", amount, failed: amount < 0 });
 
     return this.balance;
   }
