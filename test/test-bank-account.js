@@ -36,10 +36,10 @@ describe("Bank Account", () => {
   });
 
   describe("#merge", () => {
-    let original = new BankAccount(100);
+    const original = new BankAccount(100);
     original.subtract(50);
     original.append(100);
-    let account = new BankAccount(100);
+    const account = new BankAccount(100);
     account.subtract(40);
     account.subtract(20);
 
@@ -47,29 +47,34 @@ describe("Bank Account", () => {
       assert.equal(190, original.merge(account).current());
     });
 
-    original = new BankAccount(100);
-    original.subtract(50);
-    original.append(100);
-    account = new BankAccount(100);
-    account.subtract(40);
-    account.subtract(20);
+    const original2 = new BankAccount(100);
+    original2.subtract(50);
+    original2.append(100);
+    const account2 = new BankAccount(100);
+    account2.subtract(40);
+    account2.subtract(20);
 
     it("(Positive) Should merge the account histories", () => {
       assert.deepEqual(
-        [...original.history(), ...account.history],
-        original.merge(account).history()
+        [
+          { operation: "subtract", amount: 50 },
+          { operation: "append", amount: 100 },
+          { operation: "subtract", amount: 40 },
+          { operation: "subtract", amount: 20 },
+        ],
+        original2.merge(account2).history()
       );
     });
 
-    original = new BankAccount(100);
-    original.subtract(50);
-    original.append(100);
-    account = new BankAccount(0);
-    account.subtract(40);
-    account.subtract(20);
+    const original3 = new BankAccount(100);
+    original3.subtract(50);
+    original3.append(100);
+    const account3 = new BankAccount(0);
+    account3.subtract(40);
+    account3.subtract(20);
 
     it("(Negative) Should merge the account balances subtracting from original", () => {
-      assert.equal(90, original.merge(account).current());
+      assert.equal(90, original3.merge(account3).current());
     });
   });
 

@@ -1,18 +1,36 @@
 class BankAccount {
   constructor(balance) {
     this.balance = balance;
-    this.history = [];
+    this.hist = [];
   }
 
-  current() {}
+  current() {
+    return this.balance;
+  }
 
-  append() {}
+  append(amount) {
+    if (amount > 0) this.balance += amount;
+    this.hist.push({ operation: "append", amount });
 
-  subtract() {}
+    return this.balance;
+  }
 
-  merge() {}
+  subtract(amount) {
+    if (amount > 0) this.balance -= amount;
+    this.hist.push({ operation: "subtract", amount });
 
-  history() {}
+    return this.balance;
+  }
+
+  merge(account) {
+    this.balance += account.current();
+    this.hist = [...this.history(), ...account.history()];
+    return this;
+  }
+
+  history() {
+    return this.hist;
+  }
 }
 
 module.exports = BankAccount;
