@@ -1,4 +1,5 @@
 const assert = require("assert");
+const VectorCalculator = require("../app/models/VectorCalculator");
 
 describe("Vector Calculator", () => {
   describe("#sum", () => {
@@ -24,7 +25,7 @@ describe("Vector Calculator", () => {
     const x = 3.5;
 
     it("Should scale the given vector by x", () => {
-      assert.deepEqual({ x: 14.0, y: 10.5 }, VectorCalculator.scalar(a, x));
+      assert.deepEqual({ x: 14.0, y: 10.5 }, VectorCalculator.scalar(v1, x));
     });
   });
 
